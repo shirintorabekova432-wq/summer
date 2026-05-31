@@ -4,14 +4,14 @@
 // Qanday olish: https://console.firebase.google.com
 // ============================================================
 
-const FIREBASE_CONFIG = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+const firebaseConfig = {
+  apiKey: "AIzaSyBxT9LvusDVijUpDqu29xP7AkiRRa8sKCQ",
+  authDomain: "summer-challange.firebaseapp.com",
+  projectId: "summer-challange",
+  storageBucket: "summer-challange.firebasestorage.app",
+  messagingSenderId: "396874594694",
+  appId: "1:396874594694:web:da31d21a841766f7b05407",
+  };
 
 // ============================================================
 // Firebase ni ishga tushirish
