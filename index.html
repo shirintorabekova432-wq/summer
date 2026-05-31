@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="uz" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summer Reading Challenge 105 Days | Kitob O'qish Challenji</title>
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            // Girls Vibe Palette
+            pink: {
+              50: '#fff0f5',
+              100: '#ffe4e1',
+              200: '#ffd1dc',
+              300: '#ffa6c9',
+              400: '#ff7597',
+              500: '#ff4d7a',
+              600: '#e02859',
+              700: '#b8143d',
+              850: '#4a1122',
+            },
+            purple: {
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              300: '#d8b4fe',
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#9333ea',
+              750: '#581c87',
+              900: '#3b0764',
+            },
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Lucide Icons (Premium Outline) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Canvas Confetti CDN (Celebrations) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="p-4 md:p-8 antialiased selection:bg-pink-300 selection:text-pink-900 min-h-screen relative">
+  <!-- Decorative bubbles for the background -->
+  <div class="deco-bubble w-96 h-96 -top-20 -left-20 bg-pink-300/20"></div>
+  <div class="deco-bubble w-80 h-80 top-1/3 -right-20 bg-purple-300/20" style="animation-delay: -5s;"></div>
+  <div class="deco-bubble w-72 h-72 -bottom-20 left-1/4 bg-pink-200/20" style="animation-delay: -10s;"></div>
+
+  <!-- MAIN CONTAINER -->
+  <div class="max-w-7xl mx-auto space-y-6">
+    
+    <!-- TOP HEADER -->
+    <header class="glass-panel p-6 border border-pink-100/30 flex flex-col md:flex-row justify-between items-center gap-4 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-32 h-full opacity-5 pointer-events-none select-none text-9xl">✨</div>
+      <div class="flex items-center gap-4">
+        <div class="p-3 bg-pink-100 dark:bg-purple-950/50 rounded-2xl border border-pink-200/50 shadow-inner">
+          <span class="text-4xl animate-bounce duration-1000 inline-block">🌸</span>
+        </div>
+        <div>
+          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight font-serif bg-gradient-to-r from-pink-500 via-pink-600 to-purple-600 dark:from-pink-400 dark:to-purple-400 bg-clip-text text-transparent">
+            Summer Reading Challenge 105 Days
+          </h1>
+          <p class="text-xs text-muted-foreground mt-1 flex items-center gap-1.5">
+            Har kuni o'qing va dunyongizni go'zalliklar bilan to'ldiring! 💖
+          </p>
+        </div>
+      </div>
+      
+      <!-- Action Utility Buttons -->
+      <div class="flex items-center gap-2 flex-wrap justify-center md:justify-end">
+        
+        <!-- Firebase Loading Indicator -->
+        <span id="firebase-loading" class="hidden text-xs text-pink-500 font-bold animate-pulse flex items-center gap-1">
+          <i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i> Yuklanmoqda...
+        </span>
+
+        <!-- Auth: User Info -->
+        <span id="auth-user-info" class="hidden text-xs text-muted-foreground font-semibold truncate max-w-[120px]"></span>
+
+        <!-- Auth: Google Login -->
+        <button id="auth-login-btn" onclick="loginWithGoogle()" class="btn-secondary text-xs px-3.5 py-2 flex items-center gap-1.5 shadow-sm font-bold">
+          <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="#EA4335" d="M5.26 9.77A7.49 7.49 0 0 1 12 4.5c1.69 0 3.22.57 4.43 1.5L19.9 2.55A11.96 11.96 0 0 0 12 0C7.42 0 3.44 2.56 1.31 6.34l3.95 3.43z"/><path fill="#34A853" d="M16.04 18.01A7.47 7.47 0 0 1 12 19.5a7.49 7.49 0 0 1-6.73-4.22L1.3 18.66A11.97 11.97 0 0 0 12 24c3.16 0 6.04-1.17 8.2-3.07l-4.16-2.92z"/><path fill="#FBBC05" d="M19.5 12c0-.68-.07-1.33-.18-1.97H12v3.72h4.24a3.75 3.75 0 0 1-1.57 2.44l4.16 2.92C20.54 17.38 21.5 14.87 21.5 12h-2z"/><path fill="#4A90D9" d="M12 7.5h7.32A11.96 11.96 0 0 0 12 0C7.42 0 3.44 2.56 1.31 6.34l3.95 3.43A7.49 7.49 0 0 1 12 4.5V7.5z" opacity=".5"/><path fill="#4285F4" d="M21.32 10.03H12v3.72h4.24a3.75 3.75 0 0 1-1.57 2.44l4.16 2.92C20.54 17.38 21.5 14.87 21.5 12c0-.68-.07-1.33-.18-1.97z" opacity=".5"/></svg>
+          Google bilan kirish
+        </button>
+
+        <!-- Auth: Logout -->
+        <button id="auth-logout-btn" onclick="logoutUser()" class="hidden btn-secondary text-xs px-3.5 py-2 flex items-center gap-1.5 shadow-sm font-bold text-rose-500">
+          <i data-lucide="log-out" class="w-4 h-4"></i> Chiqish
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" onclick="toggleTheme()" class="btn-secondary p-2.5 shadow-sm heartbeat-hover" title="Mavzuni o'zgartirish">
+          <span id="theme-toggle-icon"><i data-lucide="moon" class="w-5 h-5 text-pink-600"></i></span>
+        </button>
+
+        <!-- Import / Export Actions -->
+        <button onclick="exportDataJSON()" class="btn-secondary text-xs px-3.5 py-2 flex items-center gap-1.5 shadow-sm font-bold">
+          <i data-lucide="download" class="w-4 h-4 text-pink-500"></i> Eksport
+        </button>
+        <button onclick="triggerImportJSON()" class="btn-secondary text-xs px-3.5 py-2 flex items-center gap-1.5 shadow-sm font-bold">
+          <i data-lucide="upload" class="w-4 h-4 text-purple-500"></i> Import
+        </button>
+        <input type="file" id="import-file-input" class="hidden" accept=".json" onchange="importDataJSON(event)">
+      </div>
+    </header>
+
+    <!-- STATS DASHBOARD -->
+    <section class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+      
+      <!-- Stat Card 1 -->
+      <div class="glass-panel p-4 border border-pink-100/30 flex flex-col justify-between">
+        <span class="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">O'qilgan betlar</span>
+        <div class="flex items-baseline gap-1 mt-2">
+          <span id="stat-total-pages" class="text-2xl font-extrabold font-serif text-pink-600 dark:text-pink-400">0</span>
+          <span class="text-[10px] text-muted-foreground">bet</span>
+        </div>
+      </div>
+
+      <!-- Stat Card 2 -->
+      <div class="glass-panel p-4 border border-pink-100/30 flex flex-col justify-between">
+        <span class="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Tugatilgan kitoblar</span>
+        <div class="flex items-baseline gap-1 mt-2">
+          <span id="stat-completed-books" class="text-2xl font-extrabold font-serif text-purple-600 dark:text-purple-300">0</span>
+          <span class="text-[10px] text-muted-foreground">ta</span>
+        </div>
+      </div>
+
+      <!-- Stat Card 3 -->
+      <div class="glass-panel p-4 border border-pink-100/30 flex flex-col justify-between col-span-2">
+        <div class="flex justify-between items-center">
+          <span class="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Challenge progressi</span>
+          <span id="stat-challenge-progress" class="text-xs font-bold text-pink-600 dark:text-purple-300">0%</span>
+        </div>
+        <div class="w-full bg-pink-100 dark:bg-purple-950/40 h-2.5 rounded-full mt-3 overflow-hidden">
+          <div id="stat-challenge-bar" class="progress-bar-fill h-full rounded-full" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Stat Card 4 -->
+      <div class="glass-panel p-4 border border-pink-100/30 flex flex-col justify-between">
+        <span class="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Joriy Streak</span>
+        <div class="flex items-baseline gap-1 mt-2">
+          <span id="stat-streak" class="text-xl font-extrabold font-serif text-amber-500">0 kun</span>
+        </div>
+      </div>
+
+      <!-- Stat Card 5 -->
+      <div class="glass-panel p-4 border border-pink-100/30 flex flex-col justify-between">
+        <span class="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Eng uzun Streak</span>
+        <div class="flex items-baseline gap-1 mt-2">
+          <span id="stat-max-streak" class="text-xl font-extrabold font-serif text-purple-600 dark:text-purple-300">0 kun</span>
+        </div>
+      </div>
+
+      <!-- Stat Card 6 -->
+      <div class="glass-panel p-4 border border-pink-100/30 flex flex-col justify-between">
+        <span class="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Qolgan kun / betlar</span>
+        <div class="flex flex-col gap-0.5 mt-2">
+          <span class="text-xs font-bold"><span id="stat-remaining-days" class="text-sm text-pink-500 font-extrabold font-serif">105</span> kun qoldi</span>
+          <span class="text-xs font-bold"><span id="stat-remaining-pages" class="text-sm text-purple-500 font-extrabold font-serif">0</span> bet qoldi</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- THREE COLUMN GRID -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- LEFT COLUMN: 105-DAY TRACKER (15 WEEKS x 7 DAYS) -->
+      <section class="lg:col-span-6 glass-panel p-5 border border-pink-100/30 overflow-hidden">
+        <div class="flex justify-between items-center mb-4 pb-3 border-b border-pink-100/30">
+          <h2 class="text-lg font-serif font-bold text-pink-700 dark:text-purple-300 flex items-center gap-1.5">
+            <span>📅</span> 105 kunlik jadval
+          </h2>
+          <div class="flex items-center gap-4 text-[10px] font-bold">
+            <span class="flex items-center gap-1"><span class="w-3.5 h-3.5 bg-lime-500/20 border border-lime-500/40 rounded-full inline-block"></span> Muvaffaqiyatli</span>
+            <span class="flex items-center gap-1"><span class="w-3.5 h-3.5 bg-rose-500/20 border border-rose-500/40 rounded-full inline-block"></span> Qoniqarsiz</span>
+            <span class="flex items-center gap-1"><span class="w-3.5 h-3.5 bg-slate-200/50 border border-slate-300/50 rounded-full inline-block dark:bg-purple-950/20"></span> Kiritilmagan</span>
+          </div>
+        </div>
+
+        <!-- Scrollable grid table -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="border-b border-pink-100/30 text-xs font-bold text-muted-foreground">
+                <th class="py-2 px-1 text-center font-serif text-pink-600 dark:text-purple-300">Hafta</th>
+                <th class="py-2 px-1 text-center">Dush</th>
+                <th class="py-2 px-1 text-center">Sesh</th>
+                <th class="py-2 px-1 text-center">Chor</th>
+                <th class="py-2 px-1 text-center">Pay</th>
+                <th class="py-2 px-1 text-center">Jum</th>
+                <th class="py-2 px-1 text-center">Shan</th>
+                <th class="py-2 px-1 text-center">Yak</th>
+              </tr>
+            </thead>
+            <tbody id="tracker-grid-body">
+              <!-- JS filled rows -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- MIDDLE COLUMN: BOOKS STATUS -->
+      <section class="lg:col-span-3 space-y-6">
+        
+        <!-- Currently reading active block (Yellow/Amber) -->
+        <div class="glass-panel p-5 border border-pink-100/30">
+          <h2 class="text-sm font-serif font-extrabold uppercase tracking-wider mb-4 text-pink-700 dark:text-purple-300 flex items-center gap-1.5">
+            <span>📖</span> Hozir o'qilmoqda
+          </h2>
+          <div id="books-reading-container" class="space-y-3">
+            <!-- JS loaded active book -->
+          </div>
+        </div>
+
+        <!-- Planned books list (Red/Coral) and Completed books list (Green) -->
+        <div class="glass-panel p-5 border border-pink-100/30">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-sm font-serif font-extrabold uppercase tracking-wider text-pink-700 dark:text-purple-300 flex items-center gap-1.5">
+              <span>📚</span> Rejalashtirilgan
+            </h2>
+            <button onclick="openAddBookModal()" class="text-pink-600 hover:text-pink-700 dark:text-purple-400 dark:hover:text-purple-300 flex items-center gap-0.5 text-xs font-bold transition-all">
+              <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i> Qo'shish
+            </button>
+          </div>
+          
+          <div id="books-planned-list" class="max-h-60 overflow-y-auto pr-1">
+            <!-- JS filled planned list -->
+          </div>
+        </div>
+
+        <div class="glass-panel p-5 border border-pink-100/30">
+          <h2 class="text-sm font-serif font-extrabold uppercase tracking-wider mb-4 text-pink-700 dark:text-purple-300 flex items-center gap-1.5">
+            <span>🌸</span> Tugatilganlar
+          </h2>
+          <div id="books-completed-list" class="max-h-60 overflow-y-auto pr-1">
+            <!-- JS filled completed list -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- RIGHT COLUMN: BOOK SUMMARIES -->
+      <section class="lg:col-span-3 glass-panel p-5 border border-pink-100/30">
+        <h2 class="text-lg font-serif font-bold text-pink-700 dark:text-purple-300 mb-4 pb-3 border-b border-pink-100/30 flex items-center gap-1.5">
+          <span>✍️</span> Kitob xulosalari
+        </h2>
+        <div id="reviews-container" class="max-h-[640px] overflow-y-auto pr-1">
+          <!-- JS reviews cards -->
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ==================== SETUP WIZARD OVERLAY ==================== -->
+  <div id="setup-wizard-overlay" class="fixed inset-0 modal-overlay flex items-center justify-center z-50 p-4 hidden">
+    <div class="glass-panel max-w-lg w-full p-6 md:p-8 bg-white/95 dark:bg-purple-950/95 border border-pink-300/30 modal-content relative overflow-hidden shadow-2xl">
+      <div class="absolute -right-6 -bottom-6 text-9xl opacity-5 pointer-events-none select-none font-serif">105</div>
+      
+      <!-- Wizard Title -->
+      <div class="text-center mb-6">
+        <span class="text-4xl">🌸</span>
+        <h2 class="text-xl md:text-2xl font-extrabold font-serif text-pink-600 dark:text-purple-300 mt-2">Dastlabki Sozlash</h2>
+        <p class="text-xs text-muted-foreground mt-1">Summer Reading Challenge ilovasiga xush kelibsiz! Boshlash uchun ma'lumotlarni to'ldiring.</p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Q1: Daily minimum pages -->
+        <div>
+          <label class="block text-xs font-bold text-pink-700 dark:text-purple-300 mb-1.5" for="wizard-daily-min">
+            1. Har kuni minimum necha bet o'qimoqchisiz?
+          </label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-xs text-pink-500 font-bold pointer-events-none">📖</span>
+            <input type="number" id="wizard-daily-min" value="10" min="1" class="glass-input w-full pl-9 pr-3 py-2 text-sm font-semibold" placeholder="Masalan: 15">
+          </div>
+        </div>
+
+        <!-- Optional: Start date picker -->
+        <div>
+          <label class="block text-xs font-bold text-pink-700 dark:text-purple-300 mb-1.5" for="wizard-start-date">
+            Boshlanish sanasini tanlang:
+          </label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-xs text-pink-500 font-bold pointer-events-none">📅</span>
+            <input type="date" id="wizard-start-date" class="glass-input w-full pl-9 pr-3 py-2 text-sm font-semibold">
+          </div>
+        </div>
+
+        <!-- Q2: Book list input -->
+        <div class="border-t border-b border-pink-100/30 py-3">
+          <label class="block text-xs font-bold text-pink-700 dark:text-purple-300 mb-1.5">
+            2. Kitoblar ro'yxatini kiriting:
+          </label>
+          <div class="flex gap-2 mb-3">
+            <input type="text" id="wizard-book-title" placeholder="Kitob nomi (masalan: Atomic Habits)" class="glass-input flex-1 px-3 py-2 text-xs">
+            <input type="number" id="wizard-book-pages" placeholder="Bet soni" class="glass-input w-20 px-3 py-2 text-xs">
+            <button onclick="addWizardBookUI()" class="btn-primary text-xs px-3 py-2 flex items-center gap-1 whitespace-nowrap">
+              Qo'shish <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+          <!-- Current books queue -->
+          <div id="wizard-books-list" class="max-h-24 overflow-y-auto space-y-1.5 pr-1">
+            <!-- List updates dynamically -->
+          </div>
+        </div>
+
+        <!-- Q3: Select starting book -->
+        <div>
+          <label class="block text-xs font-bold text-pink-700 dark:text-purple-300 mb-1.5" for="wizard-starting-book">
+            3. Qaysi kitobdan boshlaysiz?
+          </label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-xs pointer-events-none">⭐</span>
+            <select id="wizard-starting-book" class="glass-input w-full pl-9 pr-3 py-2 text-xs font-semibold appearance-none bg-white dark:bg-purple-950">
+              <option value="" disabled selected>Ro'yxatdan tanlang</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="mt-6 flex justify-end">
+        <button onclick="completeSetupWizard()" class="btn-primary w-full md:w-auto px-6 py-2.5 text-sm font-bold flex items-center justify-center gap-1.5">
+          Challenjni boshlash! <i data-lucide="sparkles" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: LOG PAGES ==================== -->
+  <div id="log-modal" class="fixed inset-0 modal-overlay flex items-center justify-center z-50 p-4 hidden">
+    <div class="glass-panel max-w-sm w-full p-5 bg-white/95 dark:bg-purple-950/95 border border-pink-300/30 modal-content shadow-xl rounded-3xl">
+      <div class="flex justify-between items-center mb-4">
+        <h3 id="log-modal-title" class="font-serif font-bold text-sm text-pink-700 dark:text-purple-300">O'qilgan sahifalar</h3>
+        <button onclick="closeModal('log-modal')" class="text-muted-foreground hover:text-pink-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-muted-foreground mb-1.5" for="log-pages-input">Bugun necha bet o'qidingiz?</label>
+          <input type="number" id="log-pages-input" min="0" class="glass-input w-full px-3.5 py-2 font-bold text-center text-lg" placeholder="Betlar sonini kiriting">
+        </div>
+        <div class="flex gap-2">
+          <button onclick="closeModal('log-modal')" class="btn-secondary text-xs flex-1 py-2 font-bold">Bekor qilish</button>
+          <button onclick="saveLogModal()" class="btn-primary text-xs flex-1 py-2 font-bold">Saqlash</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: COMPLETE BOOK REVIEW ==================== -->
+  <div id="review-modal" class="fixed inset-0 modal-overlay flex items-center justify-center z-50 p-4 hidden">
+    <div class="glass-panel max-w-md w-full p-6 bg-white/95 dark:bg-purple-950/95 border border-pink-300/30 modal-content shadow-2xl rounded-3xl">
+      <!-- Title -->
+      <div class="text-center mb-4">
+        <span class="text-4xl animate-bounce inline-block">🎉</span>
+        <h3 class="font-serif font-extrabold text-lg text-pink-600 dark:text-purple-300 mt-1">Ura! Kitob tugadi!</h3>
+        <p class="text-xs text-muted-foreground mt-0.5"><strong id="review-book-title" class="text-pink-600 dark:text-purple-300 font-serif"></strong> kitobini muvaffaqiyatli yakunladingiz!</p>
+      </div>
+      
+      <!-- Review Fields -->
+      <div class="space-y-4">
+        <!-- Rating hearts selection -->
+        <div>
+          <label class="block text-xs font-bold text-muted-foreground text-center mb-1.5">Ushbu kitobni qanday baholaysiz?</label>
+          <div class="flex justify-center gap-1.5 star-rating-input">
+            <input type="radio" id="star5" name="review-rating" value="5"><label for="star5" title="Ajoyib">💖</label>
+            <input type="radio" id="star4" name="review-rating" value="4"><label for="star4" title="Yaxshi">💖</label>
+            <input type="radio" id="star3" name="review-rating" value="3"><label for="star3" title="O'rtacha">💖</label>
+            <input type="radio" id="star2" name="review-rating" value="2"><label for="star2" title="Yomon">💖</label>
+            <input type="radio" id="star1" name="review-rating" value="1"><label for="star1" title="Juda yomon">💖</label>
+          </div>
+        </div>
+
+        <!-- Review text box -->
+        <div>
+          <label class="block text-xs font-bold text-muted-foreground mb-1.5" for="review-text">Kitob haqida xulosangizni yozing:</label>
+          <textarea id="review-text" rows="4" class="glass-input w-full p-3 text-xs leading-relaxed" placeholder="Xulosa matni, eng esda qolarli jumlalar..."></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button onclick="saveReviewModal()" class="btn-primary w-full py-2.5 text-xs font-bold flex items-center justify-center gap-1.5">
+          Xulosani saqlash <i data-lucide="check-circle" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: NEXT ACTIVE BOOK SELECTION ==================== -->
+  <div id="next-book-modal" class="fixed inset-0 modal-overlay flex items-center justify-center z-50 p-4 hidden">
+    <div class="glass-panel max-w-md w-full p-6 bg-white/95 dark:bg-purple-950/95 border border-pink-300/30 modal-content shadow-2xl rounded-3xl">
+      <div class="flex justify-between items-center mb-4 pb-2 border-b border-pink-100/20">
+        <h3 class="font-serif font-extrabold text-sm text-pink-700 dark:text-purple-300">Keyingi qaysi kitobni o'qiysiz?</h3>
+        <button onclick="closeModal('next-book-modal')" class="text-muted-foreground hover:text-pink-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      
+      <!-- Info block & planned books items list -->
+      <div id="next-book-rollover-info"></div>
+      
+      <div id="next-book-list" class="max-h-64 overflow-y-auto pr-1">
+        <!-- JS loaded items -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: ADD MANUAL PLANNED BOOK ==================== -->
+  <div id="add-book-modal" class="fixed inset-0 modal-overlay flex items-center justify-center z-50 p-4 hidden">
+    <div class="glass-panel max-w-sm w-full p-5 bg-white/95 dark:bg-purple-950/95 border border-pink-300/30 modal-content shadow-xl rounded-3xl">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="font-serif font-bold text-sm text-pink-700 dark:text-purple-300">Yangi kitob rejalashtirish</h3>
+        <button onclick="closeModal('add-book-modal')" class="text-muted-foreground hover:text-pink-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-muted-foreground mb-1.5" for="add-book-title">Kitob nomi</label>
+          <input type="text" id="add-book-title" class="glass-input w-full px-3.5 py-2 text-xs" placeholder="Masalan: Ikigai">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-muted-foreground mb-1.5" for="add-book-pages">Umumiy bet soni</label>
+          <input type="number" id="add-book-pages" min="1" class="glass-input w-full px-3.5 py-2 text-xs" placeholder="Masalan: 200">
+        </div>
+        <div class="flex gap-2">
+          <button onclick="closeModal('add-book-modal')" class="btn-secondary text-xs flex-1 py-2 font-bold">Bekor qilish</button>
+          <button onclick="saveAddBookModal()" class="btn-primary text-xs flex-1 py-2 font-bold">Qo'shish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: VIEW FULL LETTER REVIEW ==================== -->
+  <div id="full-review-modal" class="fixed inset-0 modal-overlay flex items-center justify-center z-50 p-4 hidden">
+    <div class="glass-panel max-w-lg w-full p-6 md:p-8 bg-pink-50/90 dark:bg-purple-950/90 border border-pink-300/30 modal-content shadow-2xl rounded-3xl relative overflow-hidden">
+      <!-- Decorative vintage wax seal aesthetic -->
+      <div class="absolute -right-8 -top-8 text-[120px] opacity-10 select-none pointer-events-none font-serif">✉️</div>
+      
+      <div class="flex justify-between items-start mb-4 pb-2 border-b border-pink-200/50">
+        <div>
+          <h3 id="full-review-title" class="font-serif font-extrabold text-lg text-pink-700 dark:text-purple-300"></h3>
+          <span id="full-review-date" class="text-[10px] text-muted-foreground font-semibold"></span>
+        </div>
+        <button onclick="closeModal('full-review-modal')" class="p-1.5 bg-white/50 dark:bg-purple-900/50 hover:bg-pink-100 rounded-full text-muted-foreground hover:text-pink-600 transition-all"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      
+      <!-- Hearts review stars -->
+      <div class="flex gap-1 text-sm mb-4" id="full-review-hearts"></div>
+
+      <!-- Letter Review Text -->
+      <div class="bg-white/80 dark:bg-black/35 p-5 rounded-2xl border border-pink-100/20 shadow-inner max-h-72 overflow-y-auto">
+        <p id="full-review-body" class="text-xs text-muted-foreground leading-relaxed italic whitespace-pre-line"></p>
+      </div>
+
+      <!-- Close Action -->
+      <div class="mt-6 flex justify-end">
+        <button onclick="closeModal('full-review-modal')" class="btn-primary px-5 py-2 text-xs font-bold flex items-center gap-1 shadow-sm">
+          Yopish <i data-lucide="check" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <!-- Custom Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
